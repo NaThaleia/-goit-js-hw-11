@@ -1,0 +1,18 @@
+.search-form {
+  position: sticky;
+  position: -webkit-sticky;
+  z-index: 999;
+  top: 0px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin: 0 auto 20px;
+  padding: 15px 0 15px;
+  font-size: 12px;
+  background-color: #343434;
+}
+
+.search-form input {
+  border-radius: 5px;
+  padding: 5px;
+}

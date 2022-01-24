@@ -1,0 +1,51 @@
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-top: -30px;
+  padding: 30px;
+}
+
+.card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.photo-card {
+  color: #808080;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 10px 10px 5px rgba(41, 76, 102, 0.2);
+  transition: transform 250ms linear;
+  margin-bottom: 30px;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.08);
+  }
+}
+
+.thumb {
+  width: 340px;
+  height: 220px;
+}
+
+.photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  object-fit: cover;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
