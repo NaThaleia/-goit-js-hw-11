@@ -4,6 +4,7 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 axios.defaults.baseURL = 'https://pixabay.com/api/';
 const ACCES_KEY = '25380659-ab7b78ea6ecef2e4d0c13fa1b';
 
+// default params from API
 export default class ImagesAPIService {
   constructor() {
     this.searchQuery = '';
@@ -62,22 +63,22 @@ export default class ImagesAPIService {
       }
 
       const images = await data.hits;
-      this.notificationOnFirstPage();
-      this.notificationForEnd();
+      this.notificationIfFind();
+      this.notificationIfEnd();
       this.downloadPage();
       return images;
-    } catch (error) {
-      Notify.failure(error.message, 200);
+    } catch {
+      Notify.failure(error.message);
     }
   }
 
-  notificationOnFirstPage() {
+  notificationIfFind() {
     if (this.page === 1) {
       Notify.success(`Hooray! We found ${this.totalHits} images.`, 200);
     }
   }
 
-  notificationForEnd() {
+  notificationIfEnd() {
     if (this.page === this.totalPages) {
       this.endOfHits = true;
       Notify.info("We're sorry, but you've reached the end of search results.", 200);

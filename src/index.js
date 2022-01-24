@@ -34,7 +34,7 @@ async function onFormSubmit(e) {
     await initFetchImages();
   } catch (error) {
     loadMoreBtn.hideBtn();
-    Notify.failure(error.message);
+    Notify.failure('Sorry, there are no images matching your search query. Please try again.', 200);
   }
 
   refs.form.reset();
@@ -44,7 +44,7 @@ async function onloadMoreBtnClick() {
   try {
     await initFetchImages();
   } catch {
-    Notify.failure(error.message);
+    Notify.failure('Sorry, there are no images matching your search query. Please try again.', 200);
   }
   pageScroll();
   renderMarkup.lightbox.refresh();
@@ -66,6 +66,7 @@ async function initFetchImages() {
   }
   loadMoreBtn.enable();
 }
+// Плавная прокрутка страницы после запроса и отрисовки каждой следующей группы изображений.
 
 function pageScroll() {
   const { height: cardHeight } = refs.gallery.firstElementChild.getBoundingClientRect();
