@@ -9,7 +9,7 @@ const refs = {
   gallery: document.querySelector('.gallery'),
 };
 
-const imagesAPIService = new ImagesAPIService();
+const getOptions = new ImagesAPIService();
 const loadMoreBtn = new LoadMoreBtn({ selector: '.load-more' });
 const renderMarkup = new Markup({ selector: refs.gallery });
 
@@ -19,15 +19,15 @@ loadMoreBtn.button.addEventListener('click', onloadMoreBtnClick);
 async function onFormSubmit(e) {
   e.preventDefault();
   renderMarkup.reset();
-  imagesAPIService.query = e.currentTarget.searchQuery.value.trim();
+  getOptions.query = e.currentTarget.searchQuery.value.trim();
 
-  if (imagesAPIService.query === '') {
+  if (getOptions.query === '') {
     loadMoreBtn.hideBtn();
-    Notify.info('Your query is empty. Try again!');
+    Notify.info('Please fill the form!', 200);
     return;
   }
 
-  imagesAPIService.defaultPage();
+  getOptions.defaultPage();
 
   try {
     loadMoreBtn.showBtn();
@@ -53,14 +53,14 @@ async function onloadMoreBtnClick() {
 async function initFetchImages() {
   try {
     loadMoreBtn.disable();
-    const images = await imagesAPIService.fetchImages();
+    const images = await getOptions.fetchImages();
     renderMarkup.items = images;
     renderMarkup.render();
   } catch {
     Notify.failure(error.message);
   }
 
-  if (imagesAPIService.endOfHits) {
+  if (getOptions.endOfHits) {
     loadMoreBtn.hideBtn();
     return;
   }

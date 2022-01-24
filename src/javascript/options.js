@@ -63,24 +63,24 @@ export default class ImagesAPIService {
 
       const images = await data.hits;
       this.notificationOnFirstPage();
-      this.notificationForEndHits();
+      this.notificationForEnd();
       this.downloadPage();
       return images;
-    } catch {
-      Notify.failure(error.message);
+    } catch (error) {
+      Notify.failure(error.message, 200);
     }
   }
 
   notificationOnFirstPage() {
     if (this.page === 1) {
-      Notify.success(`Hooray! We found ${this.totalHits} images.`);
+      Notify.success(`Hooray! We found ${this.totalHits} images.`, 200);
     }
   }
 
-  notificationForEndHits() {
+  notificationForEnd() {
     if (this.page === this.totalPages) {
       this.endOfHits = true;
-      Notify.info("We're sorry, but you've reached the end of search results.");
+      Notify.info("We're sorry, but you've reached the end of search results.", 200);
     }
   }
 }
